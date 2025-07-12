@@ -50,6 +50,9 @@ if uploaded_file is not None:
     df["lon"] = df["region"].map(lambda x: coords.get(x, [0, 0])[0])
 
     # Affichage de la carte avec PyDeck
+    st.write("📍 Données géographiques utilisées pour la carte :")
+st.dataframe(df[["region", "lat", "lon", "consommation_kwh"]])
+
     st.pydeck_chart(pdk.Deck(
         initial_view_state=pdk.ViewState(
             latitude=12.1,
