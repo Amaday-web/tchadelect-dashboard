@@ -70,6 +70,31 @@ if uploaded_file is not None:
             ),
         ],
     ))
+   import numpy as np
+from sklearn.linear_model import LinearRegression
 
+st.subheader("🤖 Analyse intelligente")
+
+# 1. Top régions à surveiller
+consommation_par_region = df.groupby("region")["consommation_kwh"].sum().sort_values(ascending=False)
+st.markdown("### 🚨 Régions à forte consommation")
+st.dataframe(consommation_par_region.head(3))
+
+# 2. Prédiction de la consommation du mois suivant
+df_mensuel = df.groupby("mois")["consommation_kwh"].sum().reset_index()
+df_mensuel["mois_num"] = np.arange(len(df_mensuel))  # exemple : 0, 1, 2...
+
+# Modèle de régression linéaire
+model = LinearRegression()
+X = df_mensuel[["mois_num"]]
+y = df_mensuel["consommation_kwh"]
+model.fit(X, y)
+
+mois_suivant = [[len(df_mensuel)]]
+prediction = model.predict(mois_suivant)[0]
+
+st.markdown("### 🔮 Prédiction du mois prochain")
+st.success(f"La consommation estimée du mois prochain est **{prediction:.2f} kWh**")
+ 
 else:
     st.warning("📂 Veuillez importer un fichier CSV contenant les colonnes : date, type_compteur, consommation_kwh, region.")
