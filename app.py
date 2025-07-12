@@ -51,7 +51,7 @@ if uploaded_file is not None:
 
     # Affichage de la carte avec PyDeck
     st.write("📍 Données géographiques utilisées pour la carte :")
-st.dataframe(df[["region", "lat", "lon", "consommation_kwh"]])
+    st.dataframe(df[["region", "lat", "lon", "consommation_kwh"]])
 
     st.pydeck_chart(pdk.Deck(
         initial_view_state=pdk.ViewState(
