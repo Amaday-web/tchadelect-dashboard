@@ -93,7 +93,7 @@ def carte_interactive(df):
 
 # ---------- PRÉDICTION ----------
 def predictions(df):
-    st.title("🔮 Prédiction de la consommation (modèle simple)")
+    st.title("🔮 Prédiction de la consommation ")
 
     df_grouped = df.groupby("mois")["consommation_kwh"].sum().reset_index()
     df_grouped["mois_date"] = pd.to_datetime(df_grouped["mois"])
