@@ -1,4 +1,6 @@
 streamlit
 pandas
-pydeck
+numpy
 scikit-learn
+pydeck
+streamlit-option-menu
